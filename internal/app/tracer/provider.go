@@ -10,6 +10,7 @@ import (
 )
 
 func Provider(logger log.Logger) (opentracing.Tracer, func(), error) {
+	// TODO: use env variables
 	jaegerConfig := config.Configuration{
 		Disabled:    false,
 		ServiceName: "http-server",
