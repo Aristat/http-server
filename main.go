@@ -20,7 +20,7 @@ func main() {
 				Name:        "start",
 				Aliases:     []string{"s"},
 				Usage:       "run server",
-				Description: "http go kit",
+				Description: "http server",
 				Flags: []cli.Flag{
 					&cli.StringFlag{Name: "envFile", Value: ".env.development"},
 				},
