@@ -1,11 +1,11 @@
 package handlers
 
 import (
-	"github.com/go-kit/kit/log"
 	"github.com/google/wire"
+	"github.com/sirupsen/logrus"
 )
 
-func Provider(logger log.Logger) (*ServerHandler, func(), error) {
+func Provider(logger *logrus.Logger) (*ServerHandler, func(), error) {
 	serverHandler := NewServerHandler(logger)
 	return serverHandler, func() {}, nil
 }

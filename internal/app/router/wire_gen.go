@@ -6,9 +6,9 @@
 package router
 
 import (
-	"github.com/aristat/http-go-kit/internal/app/handlers"
-	"github.com/aristat/http-go-kit/internal/app/logger"
-	"github.com/aristat/http-go-kit/internal/app/tracer"
+	"github.com/aristat/http-server/internal/app/handlers"
+	"github.com/aristat/http-server/internal/app/logger"
+	"github.com/aristat/http-server/internal/app/tracer"
 	"github.com/go-chi/chi/v5"
 )
 
@@ -16,22 +16,22 @@ import (
 
 // Build
 func Build() (*chi.Mux, func(), error) {
-	logLogger, cleanup, err := logger.Provider()
+	logrusLogger, cleanup, err := logger.Provider()
 	if err != nil {
 		return nil, nil, err
 	}
-	opentracingTracer, cleanup2, err := tracer.Provider(logLogger)
+	opentracingTracer, cleanup2, err := tracer.Provider(logrusLogger)
 	if err != nil {
 		cleanup()
 		return nil, nil, err
 	}
-	serverHandler, cleanup3, err := handlers.Provider(logLogger)
+	serverHandler, cleanup3, err := handlers.Provider(logrusLogger)
 	if err != nil {
 		cleanup2()
 		cleanup()
 		return nil, nil, err
 	}
-	mux, cleanup4, err := Provider(logLogger, opentracingTracer, serverHandler)
+	mux, cleanup4, err := Provider(logrusLogger, opentracingTracer, serverHandler)
 	if err != nil {
 		cleanup3()
 		cleanup2()

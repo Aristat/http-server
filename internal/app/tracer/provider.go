@@ -1,15 +1,15 @@
 package tracer
 
 import (
-	"github.com/go-kit/kit/log"
 	"github.com/opentracing/opentracing-go"
+	"github.com/sirupsen/logrus"
 	"github.com/uber/jaeger-client-go"
 	"github.com/uber/jaeger-client-go/config"
 
 	"github.com/google/wire"
 )
 
-func Provider(logger log.Logger) (opentracing.Tracer, func(), error) {
+func Provider(logger *logrus.Logger) (opentracing.Tracer, func(), error) {
 	// TODO: use env variables
 	jaegerConfig := config.Configuration{
 		Disabled:    false,
@@ -29,7 +29,9 @@ func Provider(logger log.Logger) (opentracing.Tracer, func(), error) {
 
 	cleanup := func() {
 		if e := closer.Close(); e != nil {
-			logger.Log(e.Error())
+			logger.WithFields(logrus.Fields{
+				"error": e.Error(),
+			}).Error()
 		}
 	}
 

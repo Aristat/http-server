@@ -2,12 +2,13 @@ package main
 
 import (
 	"errors"
+	"fmt"
 	"log"
 
 	"net/http"
 	"os"
 
-	"github.com/aristat/http-go-kit/internal/app/router"
+	"github.com/aristat/http-server/internal/app/router"
 	"github.com/joho/godotenv"
 	"github.com/urfave/cli/v2"
 )
@@ -39,7 +40,7 @@ func main() {
 
 					s := &http.Server{
 						Handler: r,
-						Addr:    ":3000",
+						Addr:    fmt.Sprintf(":%s", os.Getenv("PORT")),
 					}
 
 					err = s.ListenAndServe()

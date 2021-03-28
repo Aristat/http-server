@@ -3,9 +3,9 @@
 package router
 
 import (
-	"github.com/aristat/http-go-kit/internal/app/handlers"
-	"github.com/aristat/http-go-kit/internal/app/logger"
-	"github.com/aristat/http-go-kit/internal/app/tracer"
+	"github.com/aristat/http-server/internal/app/handlers"
+	"github.com/aristat/http-server/internal/app/logger"
+	"github.com/aristat/http-server/internal/app/tracer"
 	"github.com/go-chi/chi/v5"
 	"github.com/google/wire"
 )

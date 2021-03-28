@@ -5,16 +5,15 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/aristat/http-go-kit/internal/app/api"
-
-	"github.com/go-kit/kit/log"
+	"github.com/aristat/http-server/internal/app/api"
+	"github.com/sirupsen/logrus"
 )
 
 type ServerHandler struct {
-	logger log.Logger
+	logger *logrus.Logger
 }
 
-func NewServerHandler(logger log.Logger) *ServerHandler {
+func NewServerHandler(logger *logrus.Logger) *ServerHandler {
 	return &ServerHandler{logger: logger}
 }
 

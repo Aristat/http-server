@@ -3,16 +3,18 @@ package logger
 import (
 	"os"
 
-	"github.com/go-kit/kit/log"
 	"github.com/google/wire"
+	"github.com/sirupsen/logrus"
 )
 
-func Provider() (log.Logger, func(), error) {
-	var logger log.Logger
-	logger = log.NewLogfmtLogger(os.Stderr)
-	logger = log.With(logger, "caller", log.DefaultCaller)
+// TODO: use logger interface
+func Provider() (*logrus.Logger, func(), error) {
+	log := logrus.New()
+	log.SetFormatter(&logrus.JSONFormatter{})
+	log.SetOutput(os.Stdout)
+	log.SetReportCaller(true)
 
-	return logger, func() {}, nil
+	return log, func() {}, nil
 }
 
 var (
